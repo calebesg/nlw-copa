@@ -1,3 +1,5 @@
+import { GetStaticProps } from 'next'
+import { FormEvent, useState } from 'react'
 import Image from 'next/image'
 
 import { api } from '../lib/axios'
@@ -14,6 +16,31 @@ interface HomeProps {
 }
 
 export default function Home(props: HomeProps) {
+  const [poolTitle, setPoolTitle] = useState('')
+
+  async function createPool(event: FormEvent) {
+    event.preventDefault()
+
+    try {
+      const response = await api.post('/pools', {
+        title: poolTitle,
+      })
+
+      const { code } = response.data
+
+      await navigator.clipboard.writeText(code)
+
+      alert(
+        'Bolão criado com sucesso, o código foi copidado para área de transferência!'
+      )
+
+      setPoolTitle('')
+    } catch (err) {
+      console.error(err)
+      alert('Falha ao criar o bolão, tente novamente!')
+    }
+  }
+
   return (
     <div className="max-w-[1124px] h-screen mx-auto grid grid-cols-2 gap-28 items-center">
       <main>
@@ -31,11 +58,13 @@ export default function Home(props: HomeProps) {
           </strong>
         </div>
 
-        <form className="mt-10 flex gap-2">
+        <form onSubmit={createPool} className="mt-10 flex gap-2">
           <input
-            className="flex-1 text-sm px-6 py-4 bg-gray-800 border border-gray-600 rounded"
+            className="flex-1 text-sm px-6 py-4 text-gray-100 bg-gray-800 border border-gray-600 rounded"
             type="text"
             placeholder="Qual nome do seu bolão?"
+            value={poolTitle}
+            onChange={e => setPoolTitle(e.target.value)}
           />
           <button
             className="px-6 py-4 bg-yellow-500 rounded text-gray-900 text-sm font-bold uppercase hover:bg-yellow-700"
@@ -77,7 +106,7 @@ export default function Home(props: HomeProps) {
   )
 }
 
-export const getServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const [poolCountResponse, guessCountResponse, userCountResponse] =
     await Promise.all([
       api('/pools/count'),
@@ -91,5 +120,6 @@ export const getServerSideProps = async () => {
       guessCount: guessCountResponse.data.count,
       userCount: userCountResponse.data.count,
     },
+    revalidate: 60 * 10,
   }
 }
