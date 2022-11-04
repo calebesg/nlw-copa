@@ -23,6 +23,18 @@ async function bootstrap() {
     return { count }
   })
 
+  fastify.get('/users/count', async () => {
+    const count = await prisma.user.count()
+
+    return { count }
+  })
+
+  fastify.get('/guesses/count', async () => {
+    const count = await prisma.guess.count()
+
+    return { count }
+  })
+
   fastify.post('/pools', async (request, reply) => {
     const createPoolBody = z.object({
       title: z.string(),
