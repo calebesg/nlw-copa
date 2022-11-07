@@ -30,7 +30,7 @@ export default function App() {
           translucent
         />
 
-        {fontsLoaded ? <New /> : <Loading />}
+        {fontsLoaded ? <SignIn /> : <Loading />}
       </AuthContextProvider>
     </NativeBaseProvider>
   )
