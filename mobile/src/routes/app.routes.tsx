@@ -53,7 +53,11 @@ export function AppRoutes() {
         }}
       />
 
-      <Screen name="find" component={Find} options={() => null} />
+      <Screen
+        name="find"
+        component={Find}
+        options={{ tabBarButton: () => null }}
+      />
     </Navigator>
   )
 }
