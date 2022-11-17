@@ -36,7 +36,11 @@ export async function gameRoutes(fastify: FastifyInstance) {
           return {
             ...game,
             guess: game.guesses.length > 0 ? game.guesses[0] : null,
+            firstTeamCountryCode: game.firstTermCountryCode,
+            secondTeamCountryCode: game.secondTermCountryCode,
             guesses: undefined,
+            firstTermCountryCode: undefined,
+            secondTermCountryCode: undefined,
           }
         }),
       }
