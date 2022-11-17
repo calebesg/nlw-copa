@@ -12,7 +12,7 @@ export async function guessRoutes(fastify: FastifyInstance) {
   })
 
   fastify.post(
-    '/pools/:poolId/games/gameId/guesses',
+    '/pools/:poolId/games/:gameId/guesses',
     { onRequest: [authenticate] },
     async (request, reply) => {
       const createGuessParams = z.object({
