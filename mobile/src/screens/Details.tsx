@@ -48,9 +48,9 @@ export function Details() {
     }
   }
 
-  async function handlePoolShare() {
+  async function handlePoolShare(code: string) {
     await Share.share({
-      message: poolDetails.code,
+      message: code,
     })
   }
 
@@ -66,7 +66,7 @@ export function Details() {
         title={poolDetails.title}
         showBackButton
         showShareButton
-        onShare={handlePoolShare}
+        onShare={() => handlePoolShare(poolDetails.code)}
       />
 
       {poolDetails._count.participants > 0 ? (
@@ -86,7 +86,11 @@ export function Details() {
             />
           </HStack>
 
-          <Guesses poolId={poolDetails.id} />
+          <Guesses
+            poolId={poolDetails.id}
+            code={poolDetails.code}
+            handlePoolShare={handlePoolShare}
+          />
         </VStack>
       ) : (
         <EmptyMyPoolList code={poolDetails.code} />
