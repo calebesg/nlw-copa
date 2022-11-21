@@ -25,9 +25,26 @@
 - [React Native](https://reactnative.dev/)
 - [Native Base](https://nativebase.io/)
 
-## 🏃💨 Getting started
+### ☁️ Getting started server
 
-1. Clone this repo with ``git clone https://github.com/calebesg/nlw-copa.git``
-2. Move yourself to the nlw-copa directory: `cd nlw-copa`
-3. Run the ``npm install`` add all dependencies
-4. Run ``npm start`` start app
+1. Move yourself to the server directory: ``cd server``
+2. Run ``yarn`` or ``npm install`` to install all dependencies
+3. Run ``npx prisma migration`` to create the database
+4. Run ``npm run dev`` inicialize server
+
+### 💻 Getting started web
+
+1. Move yourself to the web directory: ``cd web``
+2. Run ``yarn`` or ``npm install`` to install all dependencies
+3. Run ``npm run dev`` to start project
+
+### 📱 Getting started mobile
+
+1. Move yourself to the mobile directory: ``cd mobile``
+2. Run ``yarn`` or ``npm install`` to install all dependencies
+3. Run ``npx expo start`` to start project
+4. Scan QRcode in browser with expo app on ``Android OS`` or camera app on ``IOS``
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](https://opensource.org/licenses/MIT) page for details.
